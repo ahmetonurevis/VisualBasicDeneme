@@ -22,6 +22,7 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.txtAd = New System.Windows.Forms.TextBox()
         Me.txtSoyad = New System.Windows.Forms.TextBox()
         Me.txtTelefon = New System.Windows.Forms.TextBox()
@@ -35,6 +36,7 @@ Partial Class Form1
         Me.Label3 = New System.Windows.Forms.Label()
         Me.btnAra = New System.Windows.Forms.Button()
         Me.txtAra = New System.Windows.Forms.TextBox()
+        Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         CType(Me.dgvMusteriler, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -146,6 +148,11 @@ Partial Class Form1
         Me.txtAra.Size = New System.Drawing.Size(100, 20)
         Me.txtAra.TabIndex = 10
         '
+        'NotifyIcon1
+        '
+        Me.NotifyIcon1.Text = "NotifyIcon1"
+        Me.NotifyIcon1.Visible = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -185,4 +192,5 @@ Partial Class Form1
     Friend WithEvents Label3 As Label
     Friend WithEvents btnAra As Button
     Friend WithEvents txtAra As TextBox
+    Friend WithEvents NotifyIcon1 As NotifyIcon
 End Class

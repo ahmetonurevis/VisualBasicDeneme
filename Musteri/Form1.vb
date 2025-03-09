@@ -4,6 +4,34 @@ Public Class Form1
 
     Dim baglanti As New SqlConnection("Server=DESKTOP-5E114JO\SQLEXPRESS;Database=MusteriDB;Integrated Security=True")
 
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        NotifyIcon1.Icon = SystemIcons.Information
+        NotifyIcon1.Text = "Müşteri Yönetim Sistemi"
+        NotifyIcon1.Visible = True
+
+
+        Dim menu As New ContextMenuStrip()
+        menu.Items.Add("Göster", Nothing, AddressOf ShowApp)
+        menu.Items.Add("Çıkış", Nothing, AddressOf CloseApp)
+        NotifyIcon1.ContextMenuStrip = menu
+
+
+        Me.Hide()
+    End Sub
+
+
+    Private Sub ShowApp(sender As Object, e As EventArgs)
+        Me.Show()
+        Me.WindowState = FormWindowState.Normal
+    End Sub
+
+
+    Private Sub CloseApp(sender As Object, e As EventArgs)
+        NotifyIcon1.Visible = False
+        Application.Exit()
+    End Sub
+
     ' Verileri Listeleme Metodu
     Sub VerileriListele()
         Dim dt As New DataTable()
@@ -73,7 +101,8 @@ Public Class Form1
             txtTelefon.Text = row.Cells(3).Value.ToString()
         End If
     End Sub
-    ' Özel Olarak yapılan aramayı getir
+
+    ' Arama Fonksiyonu
     Private Sub btnAra_Click(sender As Object, e As EventArgs) Handles btnAra.Click
         Dim dt As New DataTable()
         Dim da As New SqlDataAdapter("SELECT * FROM Musteriler WHERE Ad LIKE @Ad OR Soyad LIKE @Soyad OR Telefon LIKE @Telefon", baglanti)
@@ -82,5 +111,12 @@ Public Class Form1
         da.SelectCommand.Parameters.AddWithValue("@Telefon", "%" & txtAra.Text & "%")
         da.Fill(dt)
         dgvMusteriler.DataSource = dt
+    End Sub
+
+
+    Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        If Me.WindowState = FormWindowState.Minimized Then
+            Me.Hide()
+        End If
     End Sub
 End Class
